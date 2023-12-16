@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Display JSON Data</title>
+</head>
+<body>
+
+<h1>Employee Data</h1>
+
+<table>
+  <thead>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Employee ID</th>
+    <th>Designation</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="employee : ${employees}">
+    <td th:text="${employee.firstName}"></td>
+    <td th:text="${employee.lastName}"></td>
+    <td th:text="${employee.employeeID}"></td>
+    <td th:text="${employee.designation}"></td>
+  </tr>
+  </tbody>
+</table>
+
+</body>
+</html>
