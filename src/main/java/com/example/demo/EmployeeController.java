@@ -14,22 +14,24 @@ import static com.example.demo.JsonEmployeeService.readJsonFile;
 @Controller
 public class EmployeeController {
 
+    private  final JsonEmployeeService jsonEmployeeService ;
 
-    @GetMapping("/none")
-    public String display(Model model) {
-
-        return "none"; // Thymeleaf template name
+    public EmployeeController(JsonEmployeeService jsonEmployeeService) {
+        this.jsonEmployeeService = jsonEmployeeService;
     }
+
+
     @GetMapping("/display")
-    public String displayJsonData(Model model) {
-        try {
-            String filePath = "Employee.json";
-            List<Employee> employees = readJsonFile(filePath);
+    public String displayJsonData(Model model) throws IOException {
+
+            List<Employee> employees ;
+            employees = jsonEmployeeService.readJsonFile("Employee.json");
             model.addAttribute("employees", employees);
-        } catch (IOException e) {
-            e.printStackTrace();
-            // Handle exception
-        }
-        return "redirect:/display"; // Thymeleaf template name
+
+            for (Employee st : employees) {
+                System.out.println(st.getFirstName());
+            }
+            return "display";
+
     }
 }

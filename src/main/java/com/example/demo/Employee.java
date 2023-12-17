@@ -11,6 +11,15 @@ public class Employee {
     private String Designation;
     private List<Language> KnownLanguages;
 
+    public Employee(String firstName, String lastName, int employeeID, String designation,
+                    List<Language> KnownLanguages) {
+        this.FirstName = firstName;
+        this.LastName = lastName;
+        this.EmployeeID = employeeID;
+        this.Designation = designation;
+        this.KnownLanguages = KnownLanguages;
+    }
+
     public String getFirstName() {
         return FirstName;
     }
@@ -50,11 +59,16 @@ public class Employee {
     public void setKnownLanguages(List<Language> knownLanguages) {
         KnownLanguages = knownLanguages;
     }
-// Getters and setters
 
     public static class Language {
         private String LanguageName;
         private int ScoreOutof100;
+        public Language() {}
+
+        public Language(String languageName, int scoreOutof100) {
+            LanguageName = languageName;
+            ScoreOutof100 = scoreOutof100;
+        }
 
         public String getLanguageName() {
             return LanguageName;
@@ -71,6 +85,6 @@ public class Employee {
         public void setScoreOutof100(int scoreOutof100) {
             ScoreOutof100 = scoreOutof100;
         }
-// Getters and setters
-    }
+
+}
 }

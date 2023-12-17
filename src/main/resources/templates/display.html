@@ -14,15 +14,24 @@
     <th>Last Name</th>
     <th>Employee ID</th>
     <th>Designation</th>
+    <th>Language ( Name : Score)</th>
+
   </tr>
   </thead>
   <tbody>
   <tr th:each="employee : ${employees}">
-    <td th:text="${employee.firstName}"></td>
-    <td th:text="${employee.lastName}"></td>
-    <td th:text="${employee.employeeID}"></td>
-    <td th:text="${employee.designation}"></td>
-  </tr>
+    <td th:text="${employee.getFirstName()}"></td>
+    <td th:text="${employee.getLastName()}"></td>
+    <td th:text="${employee.getEmployeeID()}"></td>
+    <td th:text="${employee.getDesignation()}"></td>
+    <td>
+      <ul>
+        <!-- Iterate over knownLanguages for each employee -->
+        <li th:each="language : ${employee.knownLanguages}">
+          <span th:text="${language.getLanguageName()}"></span>: <span th:text="${language.getScoreOutof100()}"></span>
+        </li>
+      </ul>
+    </td>  </tr>
   </tbody>
 </table>
 
