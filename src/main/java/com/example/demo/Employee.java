@@ -1,14 +1,21 @@
 package com.example.demo;
 
 // Employee.java
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 import java.util.List;
 
 public class Employee {
+    @JsonProperty("FirstName")
     private String FirstName;
+    @JsonProperty("LastName")
     private String LastName;
+    @JsonProperty("EmployeeID")
     private int EmployeeID;
+    @JsonProperty("Designation")
     private String Designation;
+    @JsonProperty("KnownLanguages")
     private List<Language> KnownLanguages;
 
     public Employee(String firstName, String lastName, int employeeID, String designation,
@@ -19,6 +26,7 @@ public class Employee {
         this.Designation = designation;
         this.KnownLanguages = KnownLanguages;
     }
+
 
     public String getFirstName() {
         return FirstName;
@@ -61,7 +69,9 @@ public class Employee {
     }
 
     public static class Language {
+        @JsonProperty("LanguageName")
         private String LanguageName;
+        @JsonProperty("ScoreOutof100")
         private int ScoreOutof100;
         public Language() {}
 

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Add New Emplyee</title>
+</head>
+<body>
+<h1>Add Employee</h1>
+
+<form th:action="@{/add-employee}" method="GET" style="padding: 1rem">
+    Enter the number of Languages: <input type="number" th:name="'numOfLanguages'"><br>
+    <input type="submit" value="Enter Data">
+</form>
+
+<form th:action="@{/add-employee}" method="POST">
+    First Name: <input type="text" th:name="'firstName'"><br>
+    Last Name: <input type="text" th:name="'lastName'"><br>
+    Employee ID: <input type="number" th:name="'employeeId'"><br>
+    Designation: <input type="text" th:name="'designation'"><br>
+    Language:<br>
+    <div id="inputContainer">
+   <th:block th:each="lang : ${additionalInputs}">
+       Language <span th:text="${lang}"></span> : <input type="text" th:name="language+${lang}"><br>
+       Language <span th:text="${lang}"></span> Score out of 100 : <input type="number" th:name="langScore+${lang}"><br>
+       <br>
+   </th:block>
+    </div>
+    <input type="Submit" value="Submit">
+</form>
+</body>
+</html>
