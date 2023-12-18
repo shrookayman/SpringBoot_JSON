@@ -140,4 +140,12 @@ public class EmployeeController {
 
         return "redirect:/display";
     }
+
+    @GetMapping("/java-experts")
+    public String getJavaExperts(Model model) throws IOException {
+        List<Employee> javaExperts = jsonEmployeeService.getJavaExperts(jsonEmployeeService.readJsonFile("Employee.json"));
+        model.addAttribute("javaExperts", javaExperts);
+        return "java-experts"; // Thymeleaf template name
+    }
+
 }

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Java Experts</title>
+</head>
+<body>
+<nav style="padding: 1rem">
+    <a href="/display" class="nav" >Display </a>
+    <a href="/add-employee"  class="nav" >Add</a>
+    <a href="/search-data" class="nav" >Search</a>
+    <a href="/java-experts" class="nav" >Java Experts</a>
+</nav>
+<h1>Java Experts</h1>
+
+<table>
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Employee ID</th>
+        <th>Designation</th>
+        <th>Language ( Name : Score)</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="javaExpert : ${javaExperts}">
+        <td th:text="${javaExpert.getFirstName()}"></td>
+        <td th:text="${javaExpert.getLastName()}"></td>
+        <td th:text="${javaExpert.getEmployeeID()}"></td>
+        <td th:text="${javaExpert.getDesignation()}"></td>
+        <td>
+            <ul>
+                <!-- Iterate over knownLanguages for each employee -->
+                <li th:each="language : ${javaExpert.getKnownLanguages()}">
+                    <span th:text="${language.getLanguageName()}"></span>: <span th:text="${language.getScoreOutof100()}"></span>
+                </li>
+            </ul>
+        </td>
+        <!-- Add more cells as needed -->
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
+<style>
+    .update{
+        margin-top: 20px;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-bottom: 20px;
+    }
+
+    th {
+        background-color: #4e6974;
+        color: white;
+        font-weight: bold;
+        text-align: left;
+        padding: 10px;
+    }
+
+    tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    td {
+        padding: 8px;
+        border: 1px solid #ddd;
+    }
+
+    .nav{
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+        font-family: 'sans-serif';
+        background-color: #4e6974;
+        color: white;
+    }
+    .nav:hover{
+        background-color:  #f2f2f2;
+        color:#4e6974;
+    }
+
+
+</style>

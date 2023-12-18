@@ -8,10 +8,8 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import static org.thymeleaf.util.StringUtils.length;
 
@@ -123,6 +121,14 @@ public class JsonEmployeeService {
 
        writeJsonFile(employees , filePath);
     }
+    public List<Employee> getJavaExperts(List<Employee> employees) {
+        return employees.stream()
+                .filter(employee -> employee.getKnownLanguages().stream()
+                        .anyMatch(language -> "Java".equals(language.getLanguageName()) && language.getScoreOutof100() > 50))
+                .sorted(Comparator.comparing(Employee::getFirstName))
+                .collect(Collectors.toList());
+    }
+
     private static void writeJsonFile(List<Employee> employees , String filePath) {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
