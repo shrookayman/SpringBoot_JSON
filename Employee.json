@@ -1,64 +1,37 @@
 [ {
+  "knownLanguages" : [ {
+    "languageName" : "c++",
+    "scoreOutof100" : 55
+  } ],
+  "designation" : "Manager",
+  "firstName" : "shrouk",
   "employeeID" : 22,
-  "designation" : "Manager",
-  "knownLanguages" : [ {
-    "scoreOutof100" : 55,
-    "languageName" : "c++",
-    "LanguageName" : "c++",
-    "ScoreOutof100" : 55
-  } ],
-  "firstName" : "shrouk",
-  "lastName" : "ayman",
-  "FirstName" : "shrouk",
-  "LastName" : "ayman",
-  "EmployeeID" : 22,
-  "Designation" : "Manager",
-  "KnownLanguages" : [ {
-    "scoreOutof100" : 55,
-    "languageName" : "c++",
-    "LanguageName" : "c++",
-    "ScoreOutof100" : 55
-  } ]
+  "lastName" : "ayman"
 }, {
+  "knownLanguages" : [ {
+    "languageName" : "Java",
+    "scoreOutof100" : 22
+  } ],
+  "designation" : "Manager",
+  "firstName" : "shrouk",
   "employeeID" : 55,
-  "designation" : "Manager",
-  "knownLanguages" : [ {
-    "scoreOutof100" : 22,
-    "languageName" : "Java",
-    "LanguageName" : "Java",
-    "ScoreOutof100" : 22
-  } ],
-  "firstName" : "shrouk",
-  "lastName" : "ayman",
-  "FirstName" : "shrouk",
-  "LastName" : "ayman",
-  "EmployeeID" : 55,
-  "Designation" : "Manager",
-  "KnownLanguages" : [ {
-    "scoreOutof100" : 22,
-    "languageName" : "Java",
-    "LanguageName" : "Java",
-    "ScoreOutof100" : 22
-  } ]
+  "lastName" : "ayman"
 }, {
-  "employeeID" : 88,
-  "designation" : "Developer",
   "knownLanguages" : [ {
-    "scoreOutof100" : 66,
     "languageName" : "Java",
-    "LanguageName" : "Java",
-    "ScoreOutof100" : 66
+    "scoreOutof100" : 66
   } ],
+  "designation" : "Developer",
   "firstName" : "aya",
-  "lastName" : "ayman",
-  "FirstName" : "aya",
-  "LastName" : "ayman",
-  "EmployeeID" : 88,
-  "Designation" : "Developer",
-  "KnownLanguages" : [ {
-    "scoreOutof100" : 66,
-    "languageName" : "Java",
-    "LanguageName" : "Java",
-    "ScoreOutof100" : 66
-  } ]
+  "employeeID" : 88,
+  "lastName" : "ayman"
+}, {
+  "knownLanguages" : [ {
+    "languageName" : "k",
+    "scoreOutof100" : 5
+  } ],
+  "designation" : "k",
+  "firstName" : "Aya",
+  "employeeID" : 5,
+  "lastName" : "HHHHHHHHHHH"
 } ]

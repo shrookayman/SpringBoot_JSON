@@ -7,15 +7,15 @@ import java.util.List;
 import java.util.List;
 
 public class Employee {
-    @JsonProperty("FirstName")
+//    @JsonProperty("FirstName")
     private String FirstName;
-    @JsonProperty("LastName")
+//    @JsonProperty("LastName")
     private String LastName;
-    @JsonProperty("EmployeeID")
+//    @JsonProperty("EmployeeID")
     private int EmployeeID;
-    @JsonProperty("Designation")
+//    @JsonProperty("Designation")
     private String Designation;
-    @JsonProperty("KnownLanguages")
+//    @JsonProperty("KnownLanguages")
     private List<Language> KnownLanguages;
     public Employee(){};
     public Employee(String firstName, String lastName, int employeeID, String designation,
@@ -69,9 +69,9 @@ public class Employee {
     }
 
     public static class Language {
-        @JsonProperty("LanguageName")
+//        @JsonProperty("LanguageName")
         private String LanguageName;
-        @JsonProperty("ScoreOutof100")
+//        @JsonProperty("ScoreOutof100")
         private int ScoreOutof100;
         public Language() {}
 

@@ -21,16 +21,16 @@ public class JsonEmployeeService {
             List<Map<String, Object>> jsonData = objectMapper.readValue(new File(filePath), List.class);
             List<Employee> employees = new ArrayList<>();
             for (Map<String, Object> employeeMap : jsonData) {
-                String firstName = employeeMap.get("FirstName").toString();
-                String lastName =  employeeMap.get("LastName").toString();
-                int employeeID = (int) employeeMap.get("EmployeeID");
-                String designation =  employeeMap.get("Designation").toString();
+                String firstName = employeeMap.get("firstName").toString();
+                String lastName =  employeeMap.get("lastName").toString();
+                int employeeID = (int) employeeMap.get("employeeID");
+                String designation =  employeeMap.get("designation").toString();
 //                System.out.println(lastName);
-                List<Map<String, Integer>> knownLanguagesData = (List<Map<String, Integer>>) employeeMap.get("KnownLanguages");
+                List<Map<String, Integer>> knownLanguagesData = (List<Map<String, Integer>>) employeeMap.get("knownLanguages");
                 List<Employee.Language> knownLanguages = new ArrayList<>();
                 for (Map<String, Integer> languageData : knownLanguagesData) {
-                    String languageName = String.valueOf(languageData.get("LanguageName"));
-                    int scoreOutof100 = languageData.get("ScoreOutof100");
+                    String languageName = String.valueOf(languageData.get("languageName"));
+                    int scoreOutof100 = languageData.get("scoreOutof100");
                     knownLanguages.add(new Employee.Language(languageName, scoreOutof100));
                 }
                 employees.add(new Employee(firstName, lastName, employeeID, designation , knownLanguages));
@@ -87,34 +87,6 @@ public class JsonEmployeeService {
         writeJsonFile( employees, filePath);
     }
 
-    public static List<Employee> search(String filePath,String searchAttribute,String searchWord) throws IOException {
-
-        ObjectMapper objectMapper = new ObjectMapper();
-        List<Map<String, Object>> jsonData = objectMapper.readValue(new File(filePath), List.class);
-        List<Employee> employees = new ArrayList<>();
-        for (Map<String, Object> employeeMap : jsonData) {
-            String firstName = employeeMap.get("FirstName").toString();
-            String lastName =  employeeMap.get("LastName").toString();
-            int employeeID = (int) employeeMap.get("EmployeeID");
-            String designation =  employeeMap.get("Designation").toString();
-//                System.out.println(lastName);
-            List<Map<String, Integer>> knownLanguagesData = (List<Map<String, Integer>>) employeeMap.get("KnownLanguages");
-            List<Employee.Language> knownLanguages = new ArrayList<>();
-            for (Map<String, Integer> languageData : knownLanguagesData) {
-                String languageName = String.valueOf(languageData.get("LanguageName"));
-                int scoreOutof100 = languageData.get("ScoreOutof100");
-                knownLanguages.add(new Employee.Language(languageName, scoreOutof100));
-            }
-            employees.add(new Employee(firstName, lastName, employeeID, designation , knownLanguages));
-        }        int searchEmployeeID = 1000;
-        for (Employee employee : employees) {
-            if (employee.getEmployeeID() == searchEmployeeID) {
-                break; // Exit loop if found (assuming IDs are unique)
-            }
-        }
-
-        return employees;
-    }
     public void deleteEmployee(int employeeID, String filePath) throws IOException {
         List<Employee> employees = readJsonFile(filePath);
 
