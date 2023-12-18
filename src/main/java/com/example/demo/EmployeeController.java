@@ -63,14 +63,22 @@ public class EmployeeController {
     @PostMapping("/add-employee")
     public String addEmployee(Model model, @RequestParam Map<String, String> formData
     ) throws IOException {
-        List<String> languages = new ArrayList<>();
-        List<Integer> Scores = new ArrayList<>();
-        for (int i = 1; i <= num; i++) {
-            languages.add(formData.get("language"+i));
-            Scores.add(Integer.parseInt(formData.get("langScore"+i)));
-        }
+        try {
+            List<String> languages = new ArrayList<>();
+            List<Integer> Scores = new ArrayList<>();
+            for (int i = 1; i <= num; i++) {
+                languages.add(formData.get("language"+i));
+                Scores.add(Integer.parseInt(formData.get("langScore"+i)));
+            }
             jsonEmployeeService.addEmployeeService(formData.get("firstName"), formData.get("lastName"), Integer.parseInt(formData.get("employeeId")),formData.get("designation") , languages,Scores,"Employee.json");
+            return "redirect:/display";
+        }
+        catch (Exception e){
+            System.out.println("error");
+        }
         return "redirect:/display";
+
+
     }
 
     @GetMapping("/search-data")
