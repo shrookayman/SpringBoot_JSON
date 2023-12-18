@@ -5,6 +5,11 @@
     <title>Add New Emplyee</title>
 </head>
 <body>
+<nav style="padding: 1rem">
+    <a href="/display" class="nav" >Display </a>
+    <a href="/add-employee"  class="nav" >Add</a>
+    <a href="/search-data" class="nav" >Search</a>
+</nav>
 <h1>Add Employee</h1>
 
 <form th:action="@{/add-employee}" method="GET" style="padding: 1rem">
@@ -29,3 +34,21 @@
 </form>
 </body>
 </html>
+<style>
+
+
+    .nav{
+        text-decoration: none;
+        padding: 0.5rem 1rem;
+        border-radius: 10px;
+        font-family: 'sans-serif';
+        background-color: #4e6974;
+        color: white;
+    }
+    .nav:hover{
+        background-color:  #f2f2f2;
+        color:#4e6974;
+    }
+
+
+</style>

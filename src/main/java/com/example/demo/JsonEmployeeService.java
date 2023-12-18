@@ -2,6 +2,7 @@ package com.example.demo;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
@@ -40,6 +41,8 @@ public class JsonEmployeeService {
 
     public void addEmployee(String FirstName, String LastName, int employeeId, String Designation, List<String> languages,List<Integer> langScores,String filePath) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+
         List<Map<String, Object>> jsonData = objectMapper.readValue(new File(filePath), List.class);
         List<Employee> employees = new ArrayList<>();
         File jsonFile = new File(filePath); // Your JSON file name
@@ -106,5 +109,21 @@ public class JsonEmployeeService {
 
         return employees;
     }
+    public void deleteEmployee(int employeeID, String filePath) throws IOException {
+        List<Employee> employees = readJsonFile(filePath);
 
+        employees.removeIf(employee -> employee.getEmployeeID()== (employeeID));
+
+       writeJsonFile(employees , filePath);
+    }
+    private static void writeJsonFile(List<Employee> employees , String filePath) {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
+
+        try {
+            objectMapper.writeValue(new File(filePath), employees);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

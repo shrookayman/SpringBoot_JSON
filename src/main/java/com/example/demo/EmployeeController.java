@@ -105,5 +105,12 @@ public class EmployeeController {
         return "search-data";
     }
 
+    @PostMapping("/delete")
+    public String deleteEmployee(@RequestParam("employeeID") int employeeID) throws IOException {
+
+        jsonEmployeeService.deleteEmployee(employeeID, "Employee.json");
+
+        return "redirect:/display"; // Redirect to the display page after deletion
+    }
 
 }
