@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search</title>
+</head>
+<body>
+<div class="searchForm">
+    <h1>Search about Employee</h1>
+    <form th:action="@{/search-data}" method="POST">
+        Search by:
+        <select name="searchField">
+            <option value="ID">ID</option>
+            <option value="Designation">Designation</option>
+        </select>
+        <input type="text" name="searchTerm" placeholder="Enter search term">
+        <input type="submit" value="Search">
+    </form>
+</div>
+<span> Number of Found Employees: </span> <span th:text="${numOfFoundEmployees}"></span>
+<th:block th:if="${searchedEmployees != null}">
+    <table>
+        <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Employee ID</th>
+            <th>Designation</th>
+            <th>Language ( Name : Score)</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="employee : ${searchedEmployees}">
+            <td th:text="${employee.getFirstName()}"></td>
+            <td th:text="${employee.getLastName()}"></td>
+            <td th:text="${employee.getEmployeeID()}"></td>
+            <td th:text="${employee.getDesignation()}"></td>
+            <td>
+                <ul>
+                    <!-- Iterate over knownLanguages for each employee -->
+                    <li th:each="language : ${employee.knownLanguages}">
+                        <span th:text="${language.getLanguageName()}"></span>: <span th:text="${language.getScoreOutof100()}"></span>
+                    </li>
+                </ul>
+            </td>  </tr>
+        </tbody>
+    </table>
+</th:block>
+</body>
+</html>

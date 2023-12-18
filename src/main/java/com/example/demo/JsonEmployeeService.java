@@ -31,10 +31,8 @@ public class JsonEmployeeService {
                     String languageName = String.valueOf(languageData.get("LanguageName"));
                     int scoreOutof100 = languageData.get("ScoreOutof100");
                     knownLanguages.add(new Employee.Language(languageName, scoreOutof100));
-                    System.out.println(languageData);
                 }
                 employees.add(new Employee(firstName, lastName, employeeID, designation , knownLanguages));
-                System.out.println();
             }
                 return employees;
     }
@@ -58,10 +56,8 @@ public class JsonEmployeeService {
                 String languageName = String.valueOf(languageData.get("LanguageName"));
                 int ScoreOutof100 = languageData.get("ScoreOutof100");
                 knownLanguages.add(new Employee.Language(languageName, ScoreOutof100));
-                System.out.println(languageData);
             }
             employees.add(new Employee(firstName, lastName, employeeID, designation , knownLanguages));
-            System.out.println();
         }
 
 
@@ -78,8 +74,37 @@ public class JsonEmployeeService {
             // Write data to the JSON file
             objectMapper.writeValue(jsonFile, employees);
 
-            System.out.println("Data written to JSON file successfully!");
 
 
     }
+
+    public static List<Employee> search(String filePath,String searchAttribute,String searchWord) throws IOException {
+
+        ObjectMapper objectMapper = new ObjectMapper();
+        List<Map<String, Object>> jsonData = objectMapper.readValue(new File(filePath), List.class);
+        List<Employee> employees = new ArrayList<>();
+        for (Map<String, Object> employeeMap : jsonData) {
+            String firstName = employeeMap.get("FirstName").toString();
+            String lastName =  employeeMap.get("LastName").toString();
+            int employeeID = (int) employeeMap.get("EmployeeID");
+            String designation =  employeeMap.get("Designation").toString();
+//                System.out.println(lastName);
+            List<Map<String, Integer>> knownLanguagesData = (List<Map<String, Integer>>) employeeMap.get("KnownLanguages");
+            List<Employee.Language> knownLanguages = new ArrayList<>();
+            for (Map<String, Integer> languageData : knownLanguagesData) {
+                String languageName = String.valueOf(languageData.get("LanguageName"));
+                int scoreOutof100 = languageData.get("ScoreOutof100");
+                knownLanguages.add(new Employee.Language(languageName, scoreOutof100));
+            }
+            employees.add(new Employee(firstName, lastName, employeeID, designation , knownLanguages));
+        }        int searchEmployeeID = 1000;
+        for (Employee employee : employees) {
+            if (employee.getEmployeeID() == searchEmployeeID) {
+                break; // Exit loop if found (assuming IDs are unique)
+            }
+        }
+
+        return employees;
+    }
+
 }

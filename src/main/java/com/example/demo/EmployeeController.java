@@ -12,8 +12,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.example.demo.JsonEmployeeService.readJsonFile;
-
 
 @Controller
 public class EmployeeController {
@@ -31,9 +29,9 @@ public class EmployeeController {
             employees = jsonEmployeeService.readJsonFile("Employee.json");
             model.addAttribute("employees", employees);
             for (Employee st : employees) {
-                System.out.println(st.getFirstName());
             }
-            return "display";
+
+        return "display";
     }
     int num = 0;
     @GetMapping("/add-employee")
@@ -46,7 +44,6 @@ public class EmployeeController {
                 additionalInputs.add((i + 1));
             }
             model.addAttribute("additionalInputs", additionalInputs);
-            System.out.println(additionalInputs);
     return "add-employee";
         }
         else{
@@ -67,6 +64,45 @@ public class EmployeeController {
         }
             jsonEmployeeService.addEmployee(formData.get("firstName"), formData.get("lastName"), Integer.parseInt(formData.get("employeeId")),formData.get("designation") , languages,Scores,"Employee.json");
         return "redirect:/display";
+    }
+
+    @GetMapping("/search-data")
+    public String showSearchForm() {
+        return "search-data";
+    }
+    @PostMapping("/search-data")
+    public String searchData(Model model, @RequestParam String searchField, @RequestParam String searchTerm) {
+
+        try {
+            List<Employee> employees = jsonEmployeeService.readJsonFile("Employee.json");
+            int numOfFoundEmployees = 0;
+            List<Employee> searchResults = new ArrayList<>();
+            if ("ID".equals(searchField)) {
+                for (Employee employee : employees) {
+                    if (employee.getEmployeeID() == Integer.parseInt(searchTerm)) {
+                        searchResults.add(employee);
+                        numOfFoundEmployees++;
+                    }
+                }
+            } else if ("Designation".equals(searchField)) {
+                for (Employee employee : employees) {
+                    if (employee.getDesignation().equalsIgnoreCase(searchTerm)) {
+                        searchResults.add(employee);
+                        numOfFoundEmployees++;
+
+                    }
+                }
+            }
+
+
+            model.addAttribute("searchedEmployees", searchResults);
+            model.addAttribute("numOfFoundEmployees", numOfFoundEmployees);
+
+
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+        return "search-data";
     }
 
 
