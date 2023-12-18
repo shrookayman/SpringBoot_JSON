@@ -6,10 +6,12 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import org.springframework.stereotype.Service;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import static org.thymeleaf.util.StringUtils.length;
 
@@ -39,46 +41,51 @@ public class JsonEmployeeService {
     }
 
 
-    public void addEmployee(String FirstName, String LastName, int employeeId, String Designation, List<String> languages,List<Integer> langScores,String filePath) throws IOException {
+    public void addEmployeeService(String FirstName, String LastName, int employeeId, String Designation,
+                            List<String> languages,List<Integer> langScores,String filePath) throws IOException {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-        List<Map<String, Object>> jsonData = objectMapper.readValue(new File(filePath), List.class);
-        List<Employee> employees = new ArrayList<>();
-        File jsonFile = new File(filePath); // Your JSON file name
+//        List<Map<String, Object>> jsonData = objectMapper.readValue(new File(filePath), List.class);
 
-        for (Map<String, Object> employeeMap : jsonData) {
-            String firstName = employeeMap.get("FirstName").toString();
-            String lastName =  employeeMap.get("LastName").toString();
-            int employeeID = (int) employeeMap.get("EmployeeID");
-            String designation =  employeeMap.get("Designation").toString();
-//                System.out.println(lastName);
-            List<Map<String, Integer>> knownLanguagesData = (List<Map<String, Integer>>) employeeMap.get("KnownLanguages");
-            List<Employee.Language> knownLanguages = new ArrayList<>();
-            for (Map<String, Integer> languageData : knownLanguagesData) {
-                String languageName = String.valueOf(languageData.get("LanguageName"));
-                int ScoreOutof100 = languageData.get("ScoreOutof100");
-                knownLanguages.add(new Employee.Language(languageName, ScoreOutof100));
-            }
-            employees.add(new Employee(firstName, lastName, employeeID, designation , knownLanguages));
+        // Read existing employees from the file
+        File jsonFile = new File(filePath);
+
+        // Read existing employees from the file
+        List<Employee> employees = readJsonFile(filePath);
+
+        // Create a new employee
+        List<Employee.Language> languages1 = new ArrayList<>();
+        for (int i = 0; i < languages.size(); i++) {
+            languages1.add(new Employee.Language(languages.get(i), langScores.get(i)));
         }
 
+        Employee newEmployee = new Employee(FirstName, LastName, employeeId, Designation, languages1);
+        newEmployee.setKnownLanguages(languages1);
 
-            List<Employee.Language> languages1 = new ArrayList<>();
-            for (int i =0;i<languages.size();i++){
-                languages1.add(new Employee.Language(languages.get(i), langScores.get(i)));
-            }
-        Employee employee1 = new Employee(FirstName,LastName,employeeId,Designation,languages1);
-
-            employee1.setKnownLanguages(languages1);
-
-            employees.add(employee1);
+        // Add the new employee to the existing list
+        employees.add(newEmployee);
+        // Clear the file before writing the updated list
+        try (FileWriter fileWriter = new FileWriter(jsonFile, false)) {
+            fileWriter.write(""); // Clears the file content
+        }
 
             // Write data to the JSON file
             objectMapper.writeValue(jsonFile, employees);
 
 
 
+    }
+    public void updateEmployee(String filePath) throws IOException {
+        List<Employee> employees = readJsonFile(filePath);
+
+        for (Employee employee : employees) {
+            if (employee.getEmployeeID() == 2000 && Objects.equals(employee.getDesignation(), "Developer")) {
+                employee.setDesignation("Team Leader");
+            }
+        }
+
+        writeJsonFile( employees, filePath);
     }
 
     public static List<Employee> search(String filePath,String searchAttribute,String searchWord) throws IOException {

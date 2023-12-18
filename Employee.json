@@ -1,83 +1,42 @@
-[ {
-  "firstName" : "Sam",
-  "knownLanguages" : [ {
-    "scoreOutof100" : 90,
-    "languageName" : "Java",
-    "LanguageName" : "Java",
-    "ScoreOutof100" : 90
-  }, {
-    "scoreOutof100" : 50,
-    "languageName" : "C#",
-    "LanguageName" : "C#",
-    "ScoreOutof100" : 50
-  }, {
-    "scoreOutof100" : 80,
-    "languageName" : "C++",
-    "LanguageName" : "C++",
-    "ScoreOutof100" : 80
-  } ],
-  "lastName" : "Jackson",
-  "employeeID" : 1000,
-  "designation" : "Manager",
-  "FirstName" : "Sam",
-  "LastName" : "Jackson",
-  "EmployeeID" : 1000,
-  "Designation" : "Manager",
-  "KnownLanguages" : [ {
-    "scoreOutof100" : 90,
-    "languageName" : "Java",
-    "LanguageName" : "Java",
-    "ScoreOutof100" : 90
-  }, {
-    "scoreOutof100" : 50,
-    "languageName" : "C#",
-    "LanguageName" : "C#",
-    "ScoreOutof100" : 50
-  }, {
-    "scoreOutof100" : 80,
-    "languageName" : "C++",
-    "LanguageName" : "C++",
-    "ScoreOutof100" : 80
-  } ]
-}, {
-  "firstName" : "John",
-  "knownLanguages" : [ {
-    "scoreOutof100" : 30,
-    "languageName" : "Perl",
-    "LanguageName" : "Perl",
-    "ScoreOutof100" : 30
-  }, {
-    "scoreOutof100" : 65,
-    "languageName" : "Java",
-    "LanguageName" : "Java",
-    "ScoreOutof100" : 65
-  }, {
-    "scoreOutof100" : 70,
-    "languageName" : "C++",
-    "LanguageName" : "C++",
-    "ScoreOutof100" : 70
-  } ],
-  "lastName" : "Adamo",
-  "employeeID" : 2000,
-  "designation" : "Developer",
-  "FirstName" : "John",
-  "LastName" : "Adamo",
-  "EmployeeID" : 2000,
-  "Designation" : "Developer",
-  "KnownLanguages" : [ {
-    "scoreOutof100" : 30,
-    "languageName" : "Perl",
-    "LanguageName" : "Perl",
-    "ScoreOutof100" : 30
-  }, {
-    "scoreOutof100" : 65,
-    "languageName" : "Java",
-    "LanguageName" : "Java",
-    "ScoreOutof100" : 65
-  }, {
-    "scoreOutof100" : 70,
-    "languageName" : "C++",
-    "LanguageName" : "C++",
-    "ScoreOutof100" : 70
-  } ]
-} ]
+[
+  {
+    "FirstName": "Sam" ,
+    "LastName": "Jackson" ,
+    "EmployeeID": 1000 ,
+    "Designation": "Manager",
+    "KnownLanguages": [
+      {
+        "LanguageName": "Java",
+        "ScoreOutof100": 90
+      },
+      {
+        "LanguageName": "C#",
+        "ScoreOutof100": 50
+      },
+      {
+        "LanguageName": "C++",
+        "ScoreOutof100": 80
+      }
+    ]
+  },
+  {
+    "FirstName": "John" ,
+    "LastName": "Adamo" ,
+    "EmployeeID": 2000 ,
+    "Designation": "Developer",
+    "KnownLanguages": [
+      {
+        "LanguageName": "Perl",
+        "ScoreOutof100": 30
+      },
+      {
+        "LanguageName": "Java",
+        "ScoreOutof100": 65
+      },
+      {
+        "LanguageName": "C++",
+        "ScoreOutof100": 70
+      }
+    ]
+  }
+]

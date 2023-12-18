@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 
 @Controller
@@ -52,9 +53,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/add-employee")
-    public String addEmployee(
-            Model model,
-            @RequestParam Map<String, String> formData
+    public String addEmployee(Model model, @RequestParam Map<String, String> formData
     ) throws IOException {
         List<String> languages = new ArrayList<>();
         List<Integer> Scores = new ArrayList<>();
@@ -62,7 +61,7 @@ public class EmployeeController {
             languages.add(formData.get("language"+i));
             Scores.add(Integer.parseInt(formData.get("langScore"+i)));
         }
-            jsonEmployeeService.addEmployee(formData.get("firstName"), formData.get("lastName"), Integer.parseInt(formData.get("employeeId")),formData.get("designation") , languages,Scores,"Employee.json");
+            jsonEmployeeService.addEmployeeService(formData.get("firstName"), formData.get("lastName"), Integer.parseInt(formData.get("employeeId")),formData.get("designation") , languages,Scores,"Employee.json");
         return "redirect:/display";
     }
 
@@ -112,5 +111,33 @@ public class EmployeeController {
 
         return "redirect:/display"; // Redirect to the display page after deletion
     }
+    int ID ;
+    @GetMapping("/update")
+    public String updateStudent(Model model) throws Exception {
+        try {
+            ID=2000;
+            List<Employee> employees = jsonEmployeeService.readJsonFile("Employee.json");
+            List<Employee> updateEmployee = new ArrayList<>();
+            for (Employee employee : employees) {
+                if (employee.getEmployeeID() == 2000 && Objects.equals(employee.getDesignation(), "Developer")) {
+                    updateEmployee.add(employee);
+                }
+            }
+            model.addAttribute("updateEmployee", updateEmployee);
+        } catch (Exception e) {
+            System.out.println("error");
+        }
+        return "display";
+    }
 
+    @PostMapping("/update")
+    public String updateEmployee() {
+        try {
+            jsonEmployeeService.updateEmployee("Employee.json");
+        } catch (IOException e) {
+            e.printStackTrace(); // Handle the exception appropriately
+        }
+
+        return "redirect:/display";
+    }
 }

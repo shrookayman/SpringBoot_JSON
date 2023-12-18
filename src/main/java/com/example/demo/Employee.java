@@ -17,7 +17,7 @@ public class Employee {
     private String Designation;
     @JsonProperty("KnownLanguages")
     private List<Language> KnownLanguages;
-
+    public Employee(){};
     public Employee(String firstName, String lastName, int employeeID, String designation,
                     List<Language> KnownLanguages) {
         this.FirstName = firstName;
