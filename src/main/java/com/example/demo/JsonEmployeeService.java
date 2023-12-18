@@ -97,9 +97,21 @@ public class JsonEmployeeService {
     public List<Employee> getJavaExperts(List<Employee> employees) {
         return employees.stream()
                 .filter(employee -> employee.getKnownLanguages().stream()
-                        .anyMatch(language -> "Java".equals(language.getLanguageName()) && language.getScoreOutof100() > 50))
-                .sorted(Comparator.comparing(Employee::getFirstName))
+                        .anyMatch(language -> isJava(language) && language.getScoreOutof100() > 50))
+                .sorted(Comparator.comparingInt(employee -> getJavaScore(employee)))
                 .collect(Collectors.toList());
+    }
+
+    private boolean isJava(Employee.Language language) {
+        return "java".equalsIgnoreCase(language.getLanguageName());
+    }
+
+    private int getJavaScore(Employee employee) {
+        return employee.getKnownLanguages().stream()
+                .filter(this::isJava)
+                .mapToInt(Employee.Language::getScoreOutof100)
+                .findFirst()
+                .orElse(0);
     }
 
     private static void writeJsonFile(List<Employee> employees , String filePath) throws IOException {
