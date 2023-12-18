@@ -26,13 +26,21 @@ public class EmployeeController {
 
     @GetMapping("/display")
     public String displayJsonData(Model model) throws IOException {
+        try {
             List<Employee> employees ;
             employees = jsonEmployeeService.readJsonFile("Employee.json");
             model.addAttribute("employees", employees);
             for (Employee st : employees) {
             }
 
+            return "display";
+        }
+        catch (Exception e){
+            System.out.println("error");
+//            return "add-employee";
+        }
         return "display";
+
     }
     int num = 0;
     @GetMapping("/add-employee")
@@ -143,9 +151,15 @@ public class EmployeeController {
 
     @GetMapping("/java-experts")
     public String getJavaExperts(Model model) throws IOException {
-        List<Employee> javaExperts = jsonEmployeeService.getJavaExperts(jsonEmployeeService.readJsonFile("Employee.json"));
-        model.addAttribute("javaExperts", javaExperts);
-        return "java-experts"; // Thymeleaf template name
+        try {
+            List<Employee> javaExperts = jsonEmployeeService.getJavaExperts(jsonEmployeeService.readJsonFile("Employee.json"));
+            model.addAttribute("javaExperts", javaExperts);
+            return "java-experts"; // Thymeleaf template name
+        }
+        catch (Exception e){
+            System.out.println("error");
+        }
+        return "java-experts";
     }
 
 }

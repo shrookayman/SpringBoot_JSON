@@ -41,16 +41,20 @@ public class JsonEmployeeService {
 
     public void addEmployeeService(String FirstName, String LastName, int employeeId, String Designation,
                             List<String> languages,List<Integer> langScores,String filePath) throws IOException {
+        List<Employee> employees ;
+
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
-//        List<Map<String, Object>> jsonData = objectMapper.readValue(new File(filePath), List.class);
-
-        // Read existing employees from the file
+        // Read existing employees from the file or create a new list if the file doesn't exist
         File jsonFile = new File(filePath);
+        if (jsonFile.exists()) {
+            employees = readJsonFile(filePath);
+        } else {
+            employees = new ArrayList<>();
+            jsonFile.createNewFile(); // Create a new file if it doesn't exist
 
-        // Read existing employees from the file
-        List<Employee> employees = readJsonFile(filePath);
+        }
 
         // Create a new employee
         List<Employee.Language> languages1 = new ArrayList<>();
@@ -63,13 +67,10 @@ public class JsonEmployeeService {
 
         // Add the new employee to the existing list
         employees.add(newEmployee);
-        // Clear the file before writing the updated list
-        try (FileWriter fileWriter = new FileWriter(jsonFile, false)) {
-            fileWriter.write(""); // Clears the file content
-        }
+
 
             // Write data to the JSON file
-            objectMapper.writeValue(jsonFile, employees);
+        objectMapper.writeValue(new File(filePath), employees);
 
 
 
@@ -129,7 +130,9 @@ public class JsonEmployeeService {
                 .collect(Collectors.toList());
     }
 
-    private static void writeJsonFile(List<Employee> employees , String filePath) {
+    private static void writeJsonFile(List<Employee> employees , String filePath) throws IOException {
+
+
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.enable(SerializationFeature.INDENT_OUTPUT);
 
